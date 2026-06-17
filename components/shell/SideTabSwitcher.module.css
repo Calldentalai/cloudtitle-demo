@@ -48,15 +48,25 @@
   outline-offset: 3px;
 }
 
-/* Mobile: lift above the StickyCTA so the bottom isn't a stack of fixed
-   bars. StickyCTA appears after 600px scroll, so the strip just sits a bit
-   higher to leave room. */
+/* Mobile: narrower compact pill so it doesn't dominate the viewport.
+   Lifted above the StickyCTA so the two fixed bars don't stack. */
 @media (max-width: 767px) {
   .strip {
     inset-block-end: calc(var(--space-9) + env(safe-area-inset-bottom, 0px));
+    gap: 2px;
+    padding: 3px;
+    border-radius: var(--radius-pill);
   }
   .chip {
-    padding: var(--space-2) var(--space-3);
-    font-size: 0.6875rem;
+    padding: 6px 10px;
+    font-size: 0.625rem;        /* 10px */
+    letter-spacing: 0.06em;
+    min-height: 28px;
   }
+  .chip[data-active="true"] { box-shadow: 0 3px 8px -3px oklch(35% 0.158 28 / 0.55); }
+}
+
+/* Extra-narrow phones — collapse labels to single letters as a hint */
+@media (max-width: 360px) {
+  .chip { padding: 6px 8px; }
 }
