@@ -34,10 +34,16 @@
 .col ul a:hover { color: var(--color-ink-inverse); text-decoration: underline; text-underline-offset: 4px; }
 
 .logo {
-  height: 42px;
+  height: 48px;
   width: auto;
-  filter: brightness(0) invert(1);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+  /* Bone-tinted card behind the brand-color logo so it always reads against
+     the dark navy footer surface, regardless of the source logo's color. */
+  background: var(--bone-50);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  display: inline-block;
+  box-sizing: content-box;
 }
 
 .tag {

@@ -3,7 +3,7 @@
    ----------------------------------------------------------------------------
    Modern luxury real-estate brand. Compass × Pacaso × Side × Aman digital ×
    modern Sotheby's. Soft confident geometric sans (DM Sans) + Inter body,
-   warm cream surface, forest-green accent, card-based depth.
+   warm cream surface, brand-navy accent, card-based depth.
 
    Surfaces (only two + one quiet ink band reserved):
      - bone-50 (default page ground — warm cream)
@@ -18,9 +18,9 @@
 .main {
   --concierge-sand: oklch(94% 0.012 80);
   --concierge-card: oklch(99% 0.005 80);
-  --concierge-accent: oklch(35% 0.07 155);
-  --concierge-accent-soft: oklch(45% 0.085 155);
-  --concierge-accent-tint: oklch(95% 0.022 155);
+  --concierge-accent: var(--navy-700);
+  --concierge-accent-soft: var(--navy-500);
+  --concierge-accent-tint: var(--navy-100);
   --concierge-hairline: oklch(15% 0.008 80 / 0.10);
   --concierge-hairline-strong: oklch(15% 0.008 80 / 0.18);
   --concierge-shadow:
@@ -181,7 +181,7 @@
 .btnPrimary:hover {
   background: var(--concierge-accent-soft);
   border-color: var(--concierge-accent-soft);
-  box-shadow: 0 4px 12px -2px oklch(35% 0.07 155 / 0.22);
+  box-shadow: 0 4px 12px -2px oklch(33% 0.090 251 / 0.22);
   transform: translateY(-1px);
 }
 
@@ -846,7 +846,7 @@
 .field input:focus {
   outline: none;
   border-color: var(--concierge-accent);
-  box-shadow: 0 0 0 3px oklch(35% 0.07 155 / 0.12);
+  box-shadow: 0 0 0 3px oklch(33% 0.090 251 / 0.12);
 }
 
 .field input::placeholder { color: var(--neutral-400); }
