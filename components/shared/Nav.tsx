@@ -12,10 +12,10 @@ interface NavProps {
 }
 
 const links = [
-  { href: "#safe-listing", label: "Safe Listing™" },
-  { href: "#how-it-works", label: "How it works" },
-  { href: "#proof", label: "Proof" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/safe-listing", label: "Safe Listing™" },
+  { href: "/for-agents", label: "For Agents" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export function Nav({ variant = "light" }: NavProps) {
@@ -72,11 +72,11 @@ export function Nav({ variant = "light" }: NavProps) {
           ))}
         </nav>
 
-        <a href="#escrow-deposit" className={styles.ctaSecondary}>
+        <a href="/make-escrow-deposit" className={styles.ctaSecondary}>
           Make Escrow Deposit
         </a>
 
-        <a href="#start" className={styles.cta}>
+        <a href="/submit-order" className={styles.cta}>
           Submit<span className={styles.ctaWide}>&nbsp;Order</span>
         </a>
 
@@ -111,7 +111,7 @@ export function Nav({ variant = "light" }: NavProps) {
           ))}
         </nav>
         <a
-          href="#escrow-deposit"
+          href="/make-escrow-deposit"
           onClick={() => setOpen(false)}
           className={styles.mobileCtaSecondary}
           tabIndex={open ? 0 : -1}
@@ -119,7 +119,7 @@ export function Nav({ variant = "light" }: NavProps) {
           Make Escrow Deposit
         </a>
         <a
-          href="#start"
+          href="/submit-order"
           onClick={() => setOpen(false)}
           className={styles.mobileCta}
           tabIndex={open ? 0 : -1}

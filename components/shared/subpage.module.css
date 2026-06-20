@@ -1,0 +1,322 @@
+/* ============================================================================
+   Subpage shell — Editorial direction
+   ----------------------------------------------------------------------------
+   Reuses the Concierge/Editorial vocabulary (warm cream surface, navy accent,
+   DM Sans display, hairline cards, 8px card radius). Purpose-built for
+   interior pages: hero band, content sections, optional intake form, CTA.
+   ============================================================================ */
+
+.main {
+  --sub-sand: oklch(94% 0.012 80);
+  --sub-card: oklch(99% 0.005 80);
+  --sub-accent: var(--navy-700);
+  --sub-accent-soft: var(--navy-500);
+  --sub-hairline: oklch(15% 0.008 80 / 0.10);
+  --sub-hairline-strong: oklch(15% 0.008 80 / 0.18);
+  --sub-shadow:
+    0 1px 2px oklch(15% 0.008 80 / 0.04),
+    0 8px 24px -12px oklch(15% 0.008 80 / 0.10);
+  --sub-radius-card: 8px;
+  --sub-radius-control: 4px;
+
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  padding: clamp(4rem, 6vw + 2rem, 8rem) var(--space-section-x) clamp(2.5rem, 3vw + 1rem, 4rem);
+  max-width: var(--width-content-wide);
+  margin-inline: auto;
+  border-bottom: 1px solid var(--sub-hairline);
+}
+
+.heroEyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--sub-accent);
+  margin: 0 0 var(--space-4);
+}
+
+.heroH1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1rem + 4vw, 4rem);
+  line-height: 1.05;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  max-width: 22ch;
+  margin: 0 0 var(--space-5);
+  color: var(--color-ink);
+}
+
+.heroSub {
+  font-family: var(--font-body);
+  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.25rem);
+  line-height: 1.55;
+  max-width: 56ch;
+  color: var(--color-ink-muted);
+  margin: 0 0 var(--space-6);
+}
+
+.heroCtaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  padding: clamp(3rem, 4vw + 1rem, 5.5rem) var(--space-section-x);
+  max-width: var(--width-content-wide);
+  margin-inline: auto;
+}
+
+.section[data-surface="sand"] {
+  background: var(--sub-sand);
+  max-width: none;
+}
+.section[data-surface="sand"] > * {
+  max-width: var(--width-content-wide);
+  margin-inline: auto;
+}
+
+.sectionEyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--sub-accent);
+  margin: 0 0 var(--space-3);
+}
+
+.sectionH2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.625rem, 1.2rem + 1.2vw, 2.25rem);
+  line-height: 1.15;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  max-width: 26ch;
+  margin: 0 0 var(--space-5);
+  color: var(--color-ink);
+}
+
+.prose {
+  max-width: 64ch;
+  font-size: var(--text-base);
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+.prose p { margin: 0 0 var(--space-4); }
+.prose strong { color: var(--color-ink); font-weight: var(--weight-semibold); }
+
+/* ---------- TWO-COL ---------- */
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+@media (min-width: 900px) {
+  .twoCol { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* ---------- CARD GRID ---------- */
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 700px) {
+  .cardGrid { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 1024px) {
+  .cardGrid[data-cols="3"] { grid-template-columns: 1fr 1fr 1fr; }
+}
+
+.card {
+  background: var(--sub-card);
+  border: 1px solid var(--sub-hairline);
+  border-radius: var(--sub-radius-card);
+  padding: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+  box-shadow: var(--sub-shadow);
+}
+
+.cardLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-semibold);
+  color: var(--sub-accent);
+  margin: 0 0 var(--space-3);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--color-ink);
+  margin: 0 0 var(--space-2);
+}
+
+.cardBody {
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+/* ---------- LISTS ---------- */
+.bulletList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.bulletItem {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  font-size: var(--text-base);
+  line-height: 1.55;
+}
+.bulletItem::before {
+  content: "";
+  inline-size: 8px;
+  block-size: 8px;
+  margin-block-start: 9px;
+  background: var(--sub-accent);
+  border-radius: 50%;
+}
+
+/* ---------- BUTTONS ---------- */
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  background: var(--sub-accent);
+  color: var(--color-ink-inverse);
+  border: 1px solid var(--sub-accent);
+  border-radius: var(--sub-radius-control);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+}
+.btnPrimary:hover { background: var(--sub-accent-soft); transform: translateY(-1px); }
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  background: transparent;
+  color: var(--sub-accent);
+  border: 1.5px solid var(--sub-accent);
+  border-radius: var(--sub-radius-control);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  cursor: pointer;
+  transition: background var(--duration-fast), color var(--duration-fast);
+}
+.btnGhost:hover { background: var(--sub-accent); color: var(--color-ink-inverse); }
+
+/* ---------- INTAKE FORM ---------- */
+.intakeCard {
+  background: var(--sub-card);
+  border: 1px solid var(--sub-hairline);
+  border-radius: var(--sub-radius-card);
+  padding: clamp(1.5rem, 2vw + 0.5rem, 2.25rem);
+  box-shadow: var(--sub-shadow);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.intakeFields {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-muted);
+}
+.field input,
+.field textarea {
+  font: inherit;
+  font-weight: var(--weight-regular);
+  color: var(--color-ink);
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--sub-hairline-strong);
+  border-radius: var(--sub-radius-control);
+  width: 100%;
+}
+.field input:focus,
+.field textarea:focus {
+  outline: 2px solid var(--sub-accent);
+  outline-offset: 1px;
+  border-color: var(--sub-accent);
+}
+
+.intakeSupport {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+/* ---------- BANNER / DISCLOSURE ---------- */
+.notice {
+  border: 1px solid var(--sub-hairline);
+  background: var(--sub-sand);
+  border-radius: var(--sub-radius-card);
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-muted);
+}
+.notice strong { color: var(--color-ink); }
+
+/* ---------- CONTACT ROW ---------- */
+.contactRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+@media (min-width: 700px) {
+  .contactRow { grid-template-columns: repeat(3, 1fr); }
+}
+.contactCell {
+  display: grid;
+  gap: var(--space-1);
+}
+.contactLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--sub-accent);
+}
+.contactValue {
+  font-size: var(--text-base);
+  color: var(--color-ink);
+}
