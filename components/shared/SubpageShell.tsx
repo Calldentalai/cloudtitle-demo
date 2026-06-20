@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Nav } from "@/components/shared/Nav";
 import { Footer } from "@/components/shared/Footer";
 import { StickyCTA } from "@/components/shared/StickyCTA";
+import { ConceptShell } from "@/components/shell/ConceptShell";
 import s from "./subpage.module.css";
 
 interface SubpageShellProps {
@@ -32,7 +33,7 @@ export function SubpageShell({
   hideStickyCta = false,
 }: SubpageShellProps) {
   return (
-    <>
+    <ConceptShell slug="editorial">
       <Nav />
       <main id="main" className={s.main}>
         <section className={s.hero} aria-labelledby="page-h1">
@@ -55,7 +56,7 @@ export function SubpageShell({
       </main>
       {!hideStickyCta && <StickyCTA />}
       <Footer />
-    </>
+    </ConceptShell>
   );
 }
 
