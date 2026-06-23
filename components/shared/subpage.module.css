@@ -1,14 +1,20 @@
 /* ============================================================================
-   Subpage shell — Editorial direction
+   Subpage shell — Editorial / Concierge direction
    ----------------------------------------------------------------------------
-   Reuses the Concierge/Editorial vocabulary (warm cream surface, navy accent,
-   DM Sans display, hairline cards, 8px card radius). Purpose-built for
-   interior pages: hero band, content sections, optional intake form, CTA.
+   Inherits the homepage vocabulary: warm cream + sand surfaces, navy accent,
+   DM Sans display, hairline cards, soft 8px radius. Adds editorial primitives
+   built for interior pages: asymmetric hero plate, stat strip, numbered
+   process, comparison pair, pull quote, fact strip, captioned image figures.
+
+   Every primitive maps to a simple Divi 5 module (grid, image+caption, card,
+   stat row) so the chosen direction is rebuildable in Divi later.
    ============================================================================ */
 
 .main {
   --sub-sand: oklch(94% 0.012 80);
+  --sub-bone: oklch(97% 0.008 80);
   --sub-card: oklch(99% 0.005 80);
+  --sub-ink: var(--color-ink);
   --sub-accent: var(--navy-700);
   --sub-accent-soft: var(--navy-500);
   --sub-hairline: oklch(15% 0.008 80 / 0.10);
@@ -16,6 +22,9 @@
   --sub-shadow:
     0 1px 2px oklch(15% 0.008 80 / 0.04),
     0 8px 24px -12px oklch(15% 0.008 80 / 0.10);
+  --sub-shadow-lifted:
+    0 1px 2px oklch(15% 0.008 80 / 0.05),
+    0 24px 48px -24px oklch(15% 0.008 80 / 0.18);
   --sub-radius-card: 8px;
   --sub-radius-control: 4px;
 
@@ -25,12 +34,65 @@
   overflow-x: clip;
 }
 
-/* ---------- HERO ---------- */
+/* ============================================================================
+   HERO — two variants
+   --------------------------------------------------------------------------
+   `.hero` is the type-only hero (no image). `.heroPlate` is the editorial
+   plate: asymmetric grid with image figure + caption, mirrors the homepage
+   hero composition. Used on landing/marketing subpages.
+   ============================================================================ */
+
 .hero {
   padding: clamp(4rem, 6vw + 2rem, 8rem) var(--space-section-x) clamp(2.5rem, 3vw + 1rem, 4rem);
   max-width: var(--width-content-wide);
   margin-inline: auto;
   border-bottom: 1px solid var(--sub-hairline);
+}
+
+.heroPlate {
+  padding: clamp(3.5rem, 5vw + 1.5rem, 7rem) var(--space-section-x) clamp(2rem, 3vw, 4rem);
+  max-width: var(--width-content-wide);
+  margin-inline: auto;
+  border-bottom: 1px solid var(--sub-hairline);
+}
+
+.heroPlateGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 3vw + 1rem, 3.5rem);
+  align-items: end;
+}
+@media (min-width: 960px) {
+  .heroPlateGrid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: clamp(3rem, 4vw, 5rem);
+  }
+}
+
+.heroPlateCopy { display: grid; align-content: end; gap: var(--space-5); }
+
+.heroImageFigure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.heroImageFigure img {
+  border-radius: var(--sub-radius-card);
+}
+.heroImageWrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--sub-radius-card);
+  border: 1px solid var(--sub-hairline);
+  box-shadow: var(--sub-shadow-lifted);
+}
+.heroImageCaption {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-muted);
 }
 
 .heroEyebrow {
@@ -41,6 +103,15 @@
   font-weight: var(--weight-medium);
   color: var(--sub-accent);
   margin: 0 0 var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.heroEyebrow::before {
+  content: "";
+  inline-size: 28px;
+  block-size: 1px;
+  background: var(--sub-accent);
 }
 
 .heroH1 {
@@ -69,7 +140,52 @@
   gap: var(--space-3);
 }
 
-/* ---------- SECTIONS ---------- */
+/* Hero stat strip — three lightweight cards under the hero, matches the
+   homepage service strip vocabulary. */
+.statStrip {
+  margin-top: clamp(2.5rem, 3vw + 1rem, 4rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--sub-hairline);
+  border: 1px solid var(--sub-hairline);
+  border-radius: var(--sub-radius-card);
+  overflow: hidden;
+}
+@media (min-width: 700px) { .statStrip { grid-template-columns: repeat(3, 1fr); } }
+
+.statCell {
+  background: var(--sub-card);
+  padding: clamp(1.25rem, 1.5vw + 0.5rem, 1.75rem) clamp(1.25rem, 2vw, 1.75rem);
+  display: grid;
+  gap: var(--space-2);
+}
+.statLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-muted);
+}
+.statValue {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 0.9rem + 1vw, 1.75rem);
+  line-height: 1.1;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+}
+.statValueAccent { color: var(--sub-accent); }
+.statFoot {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  margin-top: var(--space-1);
+}
+
+/* ============================================================================
+   SECTIONS
+   ============================================================================ */
 .section {
   padding: clamp(3rem, 4vw + 1rem, 5.5rem) var(--space-section-x);
   max-width: var(--width-content-wide);
@@ -83,6 +199,53 @@
 .section[data-surface="sand"] > * {
   max-width: var(--width-content-wide);
   margin-inline: auto;
+}
+
+.section[data-surface="bone"] {
+  background: var(--sub-bone);
+  max-width: none;
+}
+.section[data-surface="bone"] > * {
+  max-width: var(--width-content-wide);
+  margin-inline: auto;
+}
+
+/* Section head — numbered editorial mark + eyebrow + h2, mirrors the
+   homepage `sectionHead` rhythm. */
+.sectionHead {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: clamp(2rem, 3vw, 3rem);
+  max-width: 56ch;
+}
+.sectionHead[data-align="split"] {
+  max-width: none;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2vw, 2rem);
+  align-items: end;
+}
+@media (min-width: 900px) {
+  .sectionHead[data-align="split"] {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.sectionIndex {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  font-weight: var(--weight-medium);
+  color: var(--sub-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.sectionIndex::after {
+  content: "";
+  display: inline-block;
+  inline-size: 48px;
+  block-size: 1px;
+  background: var(--sub-accent);
 }
 
 .sectionEyebrow {
@@ -102,8 +265,16 @@
   font-weight: var(--weight-medium);
   letter-spacing: var(--tracking-tight);
   max-width: 26ch;
-  margin: 0 0 var(--space-5);
+  margin: 0 0 var(--space-4);
   color: var(--color-ink);
+}
+
+.sectionLead {
+  font-size: clamp(1.0625rem, 0.95rem + 0.4vw, 1.1875rem);
+  line-height: 1.55;
+  color: var(--color-ink-muted);
+  max-width: 56ch;
+  margin: 0;
 }
 
 .prose {
@@ -123,6 +294,14 @@
 }
 @media (min-width: 900px) {
   .twoCol { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+.twoCol[data-ratio="40-60"] {
+  grid-template-columns: 1fr;
+}
+@media (min-width: 900px) {
+  .twoCol[data-ratio="40-60"] {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
 }
 
 /* ---------- CARD GRID ---------- */
@@ -144,6 +323,9 @@
   border-radius: var(--sub-radius-card);
   padding: clamp(1.5rem, 2vw + 0.5rem, 2rem);
   box-shadow: var(--sub-shadow);
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
 }
 
 .cardLabel {
@@ -153,7 +335,7 @@
   text-transform: uppercase;
   font-weight: var(--weight-semibold);
   color: var(--sub-accent);
-  margin: 0 0 var(--space-3);
+  margin: 0;
 }
 
 .cardTitle {
@@ -162,7 +344,7 @@
   font-weight: var(--weight-semibold);
   line-height: var(--leading-snug);
   color: var(--color-ink);
-  margin: 0 0 var(--space-2);
+  margin: 0;
 }
 
 .cardBody {
@@ -172,7 +354,41 @@
   margin: 0;
 }
 
-/* ---------- LISTS ---------- */
+/* Featured / numbered card — bigger numeric, used in process lists. */
+.numberedCard {
+  position: relative;
+  background: var(--sub-card);
+  border: 1px solid var(--sub-hairline);
+  border-radius: var(--sub-radius-card);
+  padding: clamp(1.75rem, 2vw + 0.5rem, 2.25rem);
+  display: grid;
+  gap: var(--space-3);
+  box-shadow: var(--sub-shadow);
+}
+.numberedCard[data-emphasis="accent"] {
+  border-color: var(--sub-accent);
+  box-shadow: var(--sub-shadow-lifted);
+}
+.numberedIndex {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--sub-accent);
+  letter-spacing: var(--tracking-tight);
+}
+.numberedIndex small {
+  font-size: 0.45em;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+  font-weight: var(--weight-medium);
+  margin-left: var(--space-2);
+}
+
+/* ============================================================================
+   LISTS
+   ============================================================================ */
 .bulletList {
   list-style: none;
   padding: 0;
@@ -197,7 +413,216 @@
   border-radius: 50%;
 }
 
-/* ---------- BUTTONS ---------- */
+/* Benefit grid — check-marked cards, mirrors the homepage Concierge
+   benefit grid. */
+.benefitGrid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+@media (min-width: 700px) { .benefitGrid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .benefitGrid[data-cols="3"] { grid-template-columns: repeat(3, 1fr); } }
+
+.benefitCard {
+  background: var(--sub-card);
+  border: 1px solid var(--sub-hairline);
+  border-radius: var(--sub-radius-card);
+  padding: var(--space-5);
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--color-ink);
+  box-shadow: var(--sub-shadow);
+}
+
+.check {
+  inline-size: 16px;
+  block-size: 16px;
+  margin-block-start: 4px;
+  border-radius: 999px;
+  background: var(--sub-accent);
+  display: inline-grid;
+  place-items: center;
+}
+.check::after {
+  content: "";
+  inline-size: 7px;
+  block-size: 4px;
+  border-left: 1.5px solid var(--color-ink-inverse);
+  border-bottom: 1.5px solid var(--color-ink-inverse);
+  transform: rotate(-45deg) translate(1px, -1px);
+}
+
+/* ============================================================================
+   COMPARISON PAIR — old vs new
+   ============================================================================ */
+.comparePair {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+}
+@media (min-width: 900px) { .comparePair { grid-template-columns: 1fr 1fr; } }
+
+.compareCard {
+  background: var(--sub-card);
+  border: 1px solid var(--sub-hairline);
+  border-radius: var(--sub-radius-card);
+  padding: clamp(1.75rem, 2vw + 0.5rem, 2.25rem);
+  display: grid;
+  gap: var(--space-4);
+  box-shadow: var(--sub-shadow);
+}
+.compareCard[data-tone="quiet"] {
+  background: transparent;
+  border-style: dashed;
+  box-shadow: none;
+  color: var(--color-ink-muted);
+}
+.compareCard[data-tone="accent"] {
+  border-color: var(--sub-accent);
+  box-shadow: var(--sub-shadow-lifted);
+}
+
+.compareLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-semibold);
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+.compareLabelAccent { color: var(--sub-accent); }
+
+.compareList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.compareStep {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  gap: var(--space-3);
+  align-items: start;
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+.compareDotQuiet {
+  inline-size: 8px;
+  block-size: 8px;
+  margin-block-start: 8px;
+  border-radius: 50%;
+  background: oklch(50% 0.01 80 / 0.4);
+}
+.compareResult {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  color: var(--color-ink-muted);
+  border-top: 1px solid var(--sub-hairline);
+  padding-top: var(--space-3);
+  margin: 0;
+}
+.compareResultAccent {
+  color: var(--sub-accent);
+  border-top-color: var(--sub-hairline-strong);
+}
+
+/* ============================================================================
+   PULL QUOTE
+   ============================================================================ */
+.pullQuote {
+  margin: clamp(2rem, 3vw, 3rem) 0 0;
+  padding-left: clamp(1rem, 2vw, 2rem);
+  border-left: 2px solid var(--sub-accent);
+  font-family: var(--font-display);
+  font-size: clamp(1.125rem, 0.9rem + 0.8vw, 1.5rem);
+  line-height: 1.4;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+  font-style: italic;
+  max-width: 36ch;
+}
+
+/* ============================================================================
+   IMAGE PLATE — content section image (not the hero)
+   ============================================================================ */
+.imagePlate {
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+.imagePlateWrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--sub-radius-card);
+  border: 1px solid var(--sub-hairline);
+  box-shadow: var(--sub-shadow);
+}
+.imagePlateCaption {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-muted);
+}
+
+/* ============================================================================
+   FACT STRIP — large facts as a single horizontal plate
+   ============================================================================ */
+.factStrip {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background: var(--sub-hairline);
+  border: 1px solid var(--sub-hairline);
+  border-radius: var(--sub-radius-card);
+  overflow: hidden;
+  box-shadow: var(--sub-shadow);
+}
+@media (min-width: 700px) { .factStrip { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) {
+  .factStrip[data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+  .factStrip[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+}
+
+.factCell {
+  background: var(--sub-card);
+  padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1.25rem, 2vw, 1.75rem);
+  display: grid;
+  gap: var(--space-2);
+}
+.factLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: var(--sub-accent);
+}
+.factValue {
+  font-family: var(--font-display);
+  font-size: clamp(1.0625rem, 0.9rem + 0.5vw, 1.375rem);
+  line-height: 1.2;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-ink);
+}
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
 .btnPrimary {
   display: inline-flex;
   align-items: center;
@@ -235,21 +660,20 @@
 }
 .btnGhost:hover { background: var(--sub-accent); color: var(--color-ink-inverse); }
 
-/* ---------- INTAKE FORM ---------- */
+/* ============================================================================
+   INTAKE FORM
+   ============================================================================ */
 .intakeCard {
   background: var(--sub-card);
   border: 1px solid var(--sub-hairline);
   border-radius: var(--sub-radius-card);
   padding: clamp(1.5rem, 2vw + 0.5rem, 2.25rem);
-  box-shadow: var(--sub-shadow);
+  box-shadow: var(--sub-shadow-lifted);
   display: grid;
   gap: var(--space-4);
 }
 
-.intakeFields {
-  display: grid;
-  gap: var(--space-3);
-}
+.intakeFields { display: grid; gap: var(--space-3); }
 
 .field {
   display: grid;
@@ -282,31 +706,47 @@
   margin: 0;
 }
 
-/* ---------- BANNER / DISCLOSURE ---------- */
+/* ============================================================================
+   BANNER / DISCLOSURE
+   ============================================================================ */
 .notice {
   border: 1px solid var(--sub-hairline);
-  background: var(--sub-sand);
+  background: var(--sub-card);
   border-radius: var(--sub-radius-card);
   padding: var(--space-5) var(--space-6);
   font-size: var(--text-sm);
   line-height: 1.6;
   color: var(--color-ink-muted);
+  display: grid;
+  gap: var(--space-2);
+  box-shadow: var(--sub-shadow);
 }
 .notice strong { color: var(--color-ink); }
+.notice[data-tone="alert"] {
+  border-left: 3px solid var(--sub-accent);
+}
 
-/* ---------- CONTACT ROW ---------- */
+/* ============================================================================
+   CONTACT
+   ============================================================================ */
 .contactRow {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--space-5);
-  margin-bottom: var(--space-6);
+  gap: 1px;
+  background: var(--sub-hairline);
+  border: 1px solid var(--sub-hairline);
+  border-radius: var(--sub-radius-card);
+  overflow: hidden;
+  margin-bottom: var(--space-5);
+  box-shadow: var(--sub-shadow);
 }
-@media (min-width: 700px) {
-  .contactRow { grid-template-columns: repeat(3, 1fr); }
-}
+@media (min-width: 700px) { .contactRow { grid-template-columns: repeat(3, 1fr); } }
+
 .contactCell {
+  background: var(--sub-card);
+  padding: clamp(1.25rem, 2vw, 1.75rem);
   display: grid;
-  gap: var(--space-1);
+  gap: var(--space-2);
 }
 .contactLabel {
   font-family: var(--font-display);
@@ -317,6 +757,73 @@
   color: var(--sub-accent);
 }
 .contactValue {
+  font-family: var(--font-display);
   font-size: var(--text-base);
+  font-weight: var(--weight-medium);
   color: var(--color-ink);
+  line-height: 1.4;
+}
+.contactValue em { font-style: normal; color: var(--color-ink-muted); font-weight: var(--weight-regular); font-size: var(--text-xs); }
+
+/* ============================================================================
+   FOOTER CTA BAND — closes long pages with conviction
+   ============================================================================ */
+.ctaBand {
+  background: var(--sub-accent);
+  color: var(--color-ink-inverse);
+  border-radius: var(--sub-radius-card);
+  padding: clamp(2.5rem, 4vw, 4rem);
+  display: grid;
+  gap: var(--space-4);
+  text-align: left;
+}
+.ctaBandEyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  font-weight: var(--weight-medium);
+  color: oklch(95% 0.005 80 / 0.7);
+  margin: 0;
+}
+.ctaBandH2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 1.1rem + 1vw, 2rem);
+  line-height: 1.15;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-tight);
+  margin: 0;
+  max-width: 30ch;
+  color: var(--color-ink-inverse);
+}
+.ctaBandRow { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.ctaBandBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-ink-inverse);
+  color: var(--sub-accent);
+  border: 1px solid var(--color-ink-inverse);
+  border-radius: var(--sub-radius-control);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
+  transition: transform var(--duration-fast);
+}
+.ctaBandBtn:hover { transform: translateY(-1px); }
+.ctaBandBtnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  background: transparent;
+  color: var(--color-ink-inverse);
+  border: 1.5px solid oklch(95% 0.005 80 / 0.4);
+  border-radius: var(--sub-radius-control);
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-snug);
 }
