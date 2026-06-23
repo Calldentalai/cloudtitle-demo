@@ -41,7 +41,14 @@ const pdf = await mdToPdf(
       footerTemplate: '<div style="font-size:8pt;color:#6b7280;width:100%;padding:0 20mm;text-align:right;"><span class="pageNumber"></span> / <span class="totalPages"></span></div>',
     },
     launch_options: {
-      executablePath: "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+      // Cross-platform browser path. Override with PUPPETEER_EXECUTABLE_PATH if needed.
+      executablePath:
+        process.env.PUPPETEER_EXECUTABLE_PATH ||
+        (process.platform === "darwin"
+          ? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+          : process.platform === "win32"
+            ? "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+            : "/usr/bin/google-chrome"),
     },
   }
 );
